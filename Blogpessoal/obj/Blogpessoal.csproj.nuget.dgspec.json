@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\Modulo2dotnet\\Blogpessoal\\Blogpessoal\\Blogpessoal.csproj": {}
+    "C:\\Users\\User\\Documents\\BlogPessoal\\Blogpessoal\\Blogpessoal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\Modulo2dotnet\\Blogpessoal\\Blogpessoal\\Blogpessoal.csproj": {
+    "C:\\Users\\User\\Documents\\BlogPessoal\\Blogpessoal\\Blogpessoal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\Modulo2dotnet\\Blogpessoal\\Blogpessoal\\Blogpessoal.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\BlogPessoal\\Blogpessoal\\Blogpessoal.csproj",
         "projectName": "Blogpessoal",
-        "projectPath": "C:\\Users\\User\\Documents\\Modulo2dotnet\\Blogpessoal\\Blogpessoal\\Blogpessoal.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\BlogPessoal\\Blogpessoal\\Blogpessoal.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\Modulo2dotnet\\Blogpessoal\\Blogpessoal\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\BlogPessoal\\Blogpessoal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,22 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.13, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
