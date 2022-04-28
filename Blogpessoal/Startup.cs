@@ -1,6 +1,8 @@
+using Blogpessoal.src.data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,14 +31,18 @@ namespace Blogpessoal
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext context)
         {
             if (env.IsDevelopment())
             {
+                context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
             }
 
@@ -49,5 +55,13 @@ namespace Blogpessoal
                 endpoints.MapControllers();
             });
         }
+    }
+
+    internal class BlogPessoalContexto
+    {
+    }
+
+    internal class BlogpessoalContext
+    {
     }
 }
