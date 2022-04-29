@@ -33,7 +33,7 @@ namespace Blogpessoal
 
             services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
-
+            //configuração de controles
             services.AddControllers();
         }
 
