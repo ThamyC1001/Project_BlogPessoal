@@ -16,9 +16,9 @@ namespace Blogpessoal.src.repositorios
         void AtualizarPostagem(AtualizarPostagemDTO postagem);
         void DeletarPostagem(int id );
         PostagemModelo PegarPostagemPeloId(int id);
-        List<PostagemModelo> PegarTodasPostagens(string titulo);
-        List<PostagemModelo> PegarPostagensPeloTitulo();
-        List<PostagemModelo> PegarPostagensPelaDescricao(string descricao);
+        List<PostagemModelo> PegarTodasPostagens();
+        List<PostagemModelo> PegarPostagensPorPesquisa(string titulo, string descricaoTema, string nomeCriador);
+
 
     }
 }
