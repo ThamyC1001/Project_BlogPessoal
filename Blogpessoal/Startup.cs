@@ -1,4 +1,9 @@
 using Blogpessoal.src.data;
+using Blogpessoal.src.repositorios;
+using Blogpessoal.src.repositorios.implementacoes;
+using Blogpessoal.src.servicos;
+using Blogpessoal.src.servicos.implementacoes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +12,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Blogpessoal
@@ -26,28 +34,73 @@ namespace Blogpessoal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
+            // Configuraï¿½ï¿½p Banco de Dados
+            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            // Configuraï¿½ï¿½o Repositorios
+            services.AddScoped<IUsuario, UsuarioRepositorio>();
+            services.AddScoped<ITema, TemaRepositorio>();
+            services.AddScoped<IPostagem, PostagemRepositorio>();
 
-            //configuração de controles
+            // Configuraï¿½ï¿½o de Controladores
+            services.AddCors();
             services.AddControllers();
+
+            // Configuraï¿½ï¿½o de Serviï¿½os
+            services.AddScoped<IAutenticacao, AutenticacaoServicos>();
+
+            // Configuraï¿½ï¿½o do Token Autenticaï¿½ï¿½o JWTBearer
+            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+                // Configuraï¿½ï¿½o Swagger
+                services.AddSwaggerGen(s =>
+                {
+                    s.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog Pessoal", Version = "v1" });
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext contexto)
         {
+            // Ambiente de Desenvolvimento
             if (env.IsDevelopment())
             {
-                context.Database.EnsureCreated();
+                contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal"));
+
             }
 
+            // Ambiente de produï¿½ï¿½o
+
+            // Rotas
             app.UseRouting();
 
+            app.UseCors(c => c
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
+
+            // Autenticaï¿½ï¿½o e Autorizaï¿½ï¿½o
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -56,12 +109,5 @@ namespace Blogpessoal
             });
         }
     }
-
-    internal class BlogPessoalContexto
-    {
-    }
-
-    internal class BlogpessoalContext
-    {
-    }
 }
+

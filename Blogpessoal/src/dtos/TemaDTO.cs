@@ -10,10 +10,13 @@ namespace Blogpessoal.src.dtos
     /// </summary>
     public class NovoTemaDTO
     {
+       
+
         [Required, StringLength(20)]
         public string Descricao { get; set; }
-        public NovoTemaDTO(string descricao)
+        public NovoTemaDTO( string descricao)
         {
+           
             Descricao = descricao;
         }
     }
@@ -26,10 +29,14 @@ namespace Blogpessoal.src.dtos
     /// </summary>
     public class AtualizarTemaDTO
     {
+        [Required]
+         public int Id { get; set; }
+
         [Required, StringLength(20)]
         public string Descricao { get; set; }
-        public AtualizarTemaDTO(string descricao)
+        public AtualizarTemaDTO(int id, string descricao)
         {
+            Id=id;
             Descricao = descricao;
         }
     }

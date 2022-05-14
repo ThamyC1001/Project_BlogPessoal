@@ -26,16 +26,16 @@ namespace BlogPessoalTeste.Testes.data
         {
             UsuarioModelo usuario = new UsuarioModelo();
 
-            usuario.Nome = "Karol Boaz";
-            usuario.Email = "Karol@email.com";
-            usuario.Senha = "134652";
+            usuario.Nome = "Thamyres Vitoria";
+            usuario.Email = "Thamyres@email.com";
+            usuario.Senha = "201122";
             usuario.Foto = "AKITAOLINKDAFOTO"; 
 
             _context.Usuarios.Add(usuario); // add um usuario
 
             _context.SaveChanges(); // comita a criação
 
-            Assert.IsNotNull(_context.Usuarios.FirstOrDefault(usuario => usuario.Email == "Karol@email.com"));
+            Assert.IsNotNull(_context.Usuarios.FirstOrDefault(usuario => usuario.Email == "Thamyres@email.com"));
 
             //Assert.AreEqual(1, 1);
         }

@@ -2,7 +2,13 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blogpessoal.src.modelos
-{
+{ 
+    /// <summary>
+  /// <para>Resumo: Classe responsavel por representar tb_postagens no banco.</para>
+  /// <para>Criado por: Thamyres Cavalcanti</para>
+  /// <para>Versão: 1.0</para>
+  /// <para>Data: 12/05/2022</para>
+  /// </summary>
     [Table("tb_postagens")]
     public class PostagemModelo
     {
@@ -10,10 +16,10 @@ namespace Blogpessoal.src.modelos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required, StringLength(50)]
+        [Required, StringLength(30)]
         public string Titulo { get; set; }
 
-        [Required, StringLength(150)]
+        [Required, StringLength(100)]
         public string Descricao { get; set; }
 
         public string Foto { get; set; }
@@ -23,6 +29,5 @@ namespace Blogpessoal.src.modelos
 
         [ForeignKey("fk_tema")]
         public TemaModelo Tema { get; set; }
-
     }
 }
