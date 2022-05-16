@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Blogpessoal.src.data;
 using Blogpessoal.src.dtos;
 using Blogpessoal.src.repositorios;
@@ -31,6 +32,7 @@ namespace BlogPessoalTeste.Testes.repositorios
             await _repositorio.NovoTemaAsync(new NovoTemaDTO("Python"));
             await _repositorio.NovoTemaAsync(new NovoTemaDTO("JavaScript"));
 
+            //WHEN - Quando for buscar todos os temas
             var temas = await _repositorio.PegarTodosTemasAsync();
 
             //THEN - Entao deve retornar 4 temas
@@ -75,7 +77,7 @@ namespace BlogPessoalTeste.Testes.repositorios
             await _repositorio.NovoTemaAsync(new NovoTemaDTO("JavaScript"));
 
             //WHEN - Quando que pesquiso pela descricao Java
-            var temas = await _repositorio.PegarTemasPelaDescricaoAsync("Java");
+            var temas = await _repositorio.PegarTemaPelaDescricaoAsync("Java");
 
             //THEN - Entao deve retornar 2 temas
             Assert.AreEqual(2, temas.Count);

@@ -1,5 +1,7 @@
-﻿using Blogpessoal.src.servicos;
+﻿using Blogpessoal.src.dtos;
+using Blogpessoal.src.servicos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -7,50 +9,68 @@ using static Blogpessoal.src.dtos.AutenticacaoDTO;
 
 namespace Blogpessoal.src.controladores
 {
-    public class AutenticacaoControlador
+    [ApiController]
+    [Route("api/Autenticacao")]
+    [Produces("application/json")]
+    public class AutenticacaoControlador : ControllerBase
     {
-        [ApiController]
-        [Route("api/Autenticacao")]
-        [Produces("application/json")]
-        public class AutenticacaoControlador : ControllerBase
+        #region Atributos
+
+        private readonly IAutenticacao _servicos;
+
+        #endregion
+
+
+        #region Construtores
+
+        public AutenticacaoControlador(IAutenticacao servicos)
         {
-            #region Atributos
-
-            private readonly IAutenticacao _servicos;
-
-            #endregion
-
-
-            #region Construtores
-
-            public AutenticacaoControlador(IAutenticacao servicos)
-            {
-                _servicos = servicos;
-            }
-
-            #endregion
-
-
-            #region Métodos
-
-            [HttpPost]
-            [AllowAnonymous]
-            public async Task<ActionResult> AutenticarAsync([FromBody] AutenticarDTO autenticacao)
-            {
-                if (!ModelState.IsValid) return BadRequest();
-
-                try
-                {
-                    var autorizacao = await _servicos.PegarAutorizacaoAsync(autenticacao);
-                    return Ok(autorizacao);
-                }
-                catch (Exception ex)
-                {
-                    return Unauthorized(ex.Message);
-                }
-            }
-
-            #endregion
+            _servicos = servicos;
         }
+
+        #endregion
+
+
+        #region Métodos
+
+        /// <summary>
+        /// Pegar Autorização
+        /// </summary>
+        /// <param name="autenticacao">AutenticarDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     POST /api/Autenticacao
+        ///     {
+        ///        "email": "thamyres@domain.com",
+        ///        "senha": "134652"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Retorna usuario criado</response>
+        /// <response code="400">Erro na requisição</response>
+        /// <response code="401">E-mail ou senha invalido</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AutorizacaoDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> AutenticarAsync([FromBody] AutenticarDTO autenticacao)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            try
+            {
+                var autorizacao = await _servicos.PegarAutorizacaoAsync(autenticacao);
+                return Ok(autorizacao);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
+        #endregion
     }
 }

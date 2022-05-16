@@ -6,13 +6,11 @@ namespace Blogpessoal.src.dtos
     /// <para>Resumo: Classe espelho para criar uma nova postagem</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class NovaPostagemDTO
     {
-        [Required]
-        public int Id { get; set; } 
-
+     
         [Required, StringLength(30)]
         public string Titulo { get; set; }
 
@@ -20,13 +18,15 @@ namespace Blogpessoal.src.dtos
         public string Descricao { get; set; }
 
         public string Foto { get; set; }
+
         [Required]
         public string EmailCriador { get; set; }
         [Required]
         public string DescricaoTema { get; set; }
-        public NovaPostagemDTO(int id ,string titulo, string descricao, string foto, string emailCriador, string descricaoTema)
+        public NovaPostagemDTO(string titulo, string descricao, string foto, string emailCriador, string descricaoTema)
+
         {
-            Id = id;
+            Titulo = titulo;
             Descricao= descricao;
             Foto = foto;
             EmailCriador = emailCriador;
@@ -35,10 +35,10 @@ namespace Blogpessoal.src.dtos
         }
     }
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar uma nova postagem</para>
+    /// <para>Resumo: Classe espelho para alterar uma postagem</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class AtualizarPostagemDTO
     {
@@ -60,10 +60,7 @@ namespace Blogpessoal.src.dtos
             Titulo= titulo;
             Descricao = descricao;
             Foto = foto;
-            DescricaoTema = descricaoTema;
-          
-
-
+            DescricaoTema = descricaoTema;         
         }
     }
 }

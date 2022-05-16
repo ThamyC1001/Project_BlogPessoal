@@ -9,7 +9,7 @@ namespace Blogpessoal.src.repositorios
     /// <para>Resumo: Responsavel por representar ações de CRUD de tema</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 12/05/2022</para>
+    /// <para>Data: 12/05/22</para>
     /// </summary>
     public interface ITema
     {

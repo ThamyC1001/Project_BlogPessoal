@@ -75,3 +75,4 @@ C:\Users\User\Documents\BlogPessoal\Blogpessoal\obj\Debug\net5.0\refint\Blogpess
 C:\Users\User\Documents\BlogPessoal\Blogpessoal\obj\Debug\net5.0\Blogpessoal.pdb
 C:\Users\User\Documents\BlogPessoal\Blogpessoal\obj\Debug\net5.0\Blogpessoal.genruntimeconfig.cache
 C:\Users\User\Documents\BlogPessoal\Blogpessoal\obj\Debug\net5.0\ref\Blogpessoal.dll
+C:\Users\User\Documents\BlogPessoal\Blogpessoal\obj\Debug\net5.0\Blogpessoal.MvcApplicationPartsAssemblyInfo.cs

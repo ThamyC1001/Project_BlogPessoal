@@ -3,8 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blogpessoal.src.dtos
 {
+        /// <summary>
+        /// <para>Resumo: Classe espelho para autenticar um usuario</para>
+        /// <para>Criado por: Thamyres Cavalvanti</para>
+        /// <para>Versão: 1.0</para>
+        /// <para>Data: 12/05/2022</para>
+        /// </summary>
     public class AutenticarDTO
     {
+
         [Required]
         public string Email { get; set; }
 
@@ -18,6 +25,12 @@ namespace Blogpessoal.src.dtos
         }
     }
 
+    /// <summary>
+    /// <para>Resumo: Classe espelho para representar autorização de um usuario</para>
+    /// <para>Criado por: Thamyres Cavalcanti</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     public class AutorizacaoDTO
     {
         public int Id { get; set; }

@@ -1,5 +1,6 @@
 using Blogpessoal.src.data;
 using Blogpessoal.src.modelos;
+using Blogpessoal.src.utilidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -7,38 +8,36 @@ using System.Linq;
 namespace BlogPessoalTeste.Testes.data
 {
     [TestClass]
-    public class BlogPessoalContextTeste
+    public class BlogPessoalContextoTeste
     {
-        private BlogPessoalContext _context;
+        private BlogPessoalContext _contexto;
 
         [TestInitialize]
         public void inicio()
         {
             var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
-            .UseInMemoryDatabase(databaseName: "db_blogpessoal")
-            .Options;
+                .UseInMemoryDatabase(databaseName: "db_blogpessoal")
+                .Options;
 
-            _context = new BlogPessoalContext(opt);
+            _contexto = new BlogPessoalContext(opt);
         }
 
         [TestMethod]
-        public void InserirNovoUsuarioNoBancoRetonarUsuario()
+        public void InserirNovoUsuarioNoBancoRetornarUsuario()
         {
             UsuarioModelo usuario = new UsuarioModelo();
 
-            usuario.Nome = "Thamyres Vitoria";
-            usuario.Email = "Thamyres@email.com";
-            usuario.Senha = "201122";
-            usuario.Foto = "AKITAOLINKDAFOTO"; 
+            usuario.Nome = "Thamyres Cavalcanti";
+            usuario.Email = "thamyres@email.com";
+            usuario.Senha = "201121";
+            usuario.Foto = "AKITAOLINKDAFOTO";
+            usuario.Tipo = TipoUsuario.NORMAL;
 
-            _context.Usuarios.Add(usuario); // add um usuario
+            _contexto.Usuarios.Add(usuario); // Adcionando usuario
 
-            _context.SaveChanges(); // comita a criação
+            _contexto.SaveChanges(); // Commita criação
 
-            Assert.IsNotNull(_context.Usuarios.FirstOrDefault(usuario => usuario.Email == "Thamyres@email.com"));
-
-            //Assert.AreEqual(1, 1);
+            Assert.IsNotNull(_contexto.Usuarios.FirstOrDefault(u => u.Email == "karol@email.com"));
         }
-      
     }
 }

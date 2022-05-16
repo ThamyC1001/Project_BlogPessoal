@@ -6,7 +6,7 @@ namespace Blogpessoal.src.dtos
     /// <para>Resumo: Classe espelho para criar um novo tema</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class NovoTemaDTO
     {
@@ -25,14 +25,14 @@ namespace Blogpessoal.src.dtos
     /// <para>Resumo: Classe espelho para alterar um tema</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class AtualizarTemaDTO
     {
         [Required]
          public int Id { get; set; }
 
-        [Required, StringLength(20)]
+        [Required, StringLength(30)]
         public string Descricao { get; set; }
         public AtualizarTemaDTO(int id, string descricao)
         {

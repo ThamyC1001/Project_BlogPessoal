@@ -16,7 +16,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,22 +36,22 @@ namespace Blogpessoal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configura��p Banco de Dados
+            // Configuraçãp Banco de Dados
             services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            // Configura��o Repositorios
+            // Configuração Repositorios
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<ITema, TemaRepositorio>();
             services.AddScoped<IPostagem, PostagemRepositorio>();
 
-            // Configura��o de Controladores
+            // Controladores
             services.AddCors();
             services.AddControllers();
 
-            // Configura��o de Servi�os
+            // Configuração de Serviços
             services.AddScoped<IAutenticacao, AutenticacaoServicos>();
 
-            // Configura��o do Token Autentica��o JWTBearer
+            // Configuração do Token Autenticação JWTBearer
             var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
             services.AddAuthentication(a =>
             {
@@ -67,11 +69,41 @@ namespace Blogpessoal
                     ValidateAudience = false
                 };
             });
-                // Configura��o Swagger
-                services.AddSwaggerGen(s =>
+
+            // Configuração Swagger
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog Pessoal", Version = "v1" });
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    s.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog Pessoal", Version = "v1" });
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT authorization header utiliza: Bearer + JWT Token",
                 });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+            });
 
         }
 
@@ -83,13 +115,11 @@ namespace Blogpessoal
             {
                 contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerUI();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal"));
-
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
             }
 
-            // Ambiente de produ��o
-
+            // Ambiente de produção
             // Rotas
             app.UseRouting();
 
@@ -99,7 +129,7 @@ namespace Blogpessoal
                 .AllowAnyHeader()
             );
 
-            // Autentica��o e Autoriza��o
+            // Autenticação e Autorização
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -107,6 +137,7 @@ namespace Blogpessoal
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

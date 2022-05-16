@@ -7,7 +7,7 @@ namespace Blogpessoal.src.dtos
     /// <para>Resumo: Classe espelho para criar um novo usuario</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class NovoUsuarioDTO
     {
@@ -41,7 +41,7 @@ namespace Blogpessoal.src.dtos
     /// <para>Resumo: Classe espelho para criar um novo usuario</para>
     /// <para>Criado por: Thamyres Cavalcanti</para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 29/04/2022</para>
+    /// <para>Data: 13/05/22</para>
     /// </summary>
     public class AtualizarUsuarioDTO
     {
@@ -56,8 +56,9 @@ namespace Blogpessoal.src.dtos
 
         public string Foto { get; set; }
 
-        public AtualizarUsuarioDTO(string nome, string senha, string foto)
+        public AtualizarUsuarioDTO(int id, string nome, string senha, string foto)
         {
+            Id = id;
             Nome = nome;         
             Senha = senha;
             Foto = foto;
