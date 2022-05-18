@@ -59,15 +59,15 @@ namespace Blogpessoal.src.repositorios.implementacoes
         /// <para>Resumo: Método assíncrono para salvar um novo usuario</para>
         /// </summary>
         /// <param name="usuario">NovoUsuarioDTO</param>
-        public async Task NovoUsuarioAsync(NovoUsuarioDTO Usuario)
+        public async Task NovoUsuarioAsync(NovoUsuarioDTO usuario)
         {
             await _context.Usuarios.AddAsync(new UsuarioModelo
             {
-                Email = Usuario.Email,
-                Nome = Usuario.Nome,
-                Senha = Usuario.Senha,
-                Foto = Usuario.Foto,
-                Tipo = Usuario.Tipo
+                Email = usuario.Email,
+                Nome = usuario.Nome,
+                Senha = usuario.Senha,
+                Foto = usuario.Foto,
+                Tipo = usuario.Tipo
             });
         }
         /// <summary>

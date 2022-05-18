@@ -71,7 +71,7 @@ namespace Blogpessoal.src.controladores
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public async Task<ActionResult<List<UsuarioModelo>>> PegarUsuariosPeloNomeAsync([FromQuery] string nomeUsuario)
         {
-            var usuarios = await _repositorio.PegarUsuariosPeloNomeAsync(nomeUsuario);
+            var usuarios = await _repositorio.PegarUsuarioPeloNomeAsync(nomeUsuario);
 
             if (usuarios.Count < 1) return NoContent();
 

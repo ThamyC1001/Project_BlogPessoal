@@ -1,0 +1,570 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blogpessoal</name>
+    </assembly>
+    <members>
+        <member name="M:Blogpessoal.src.controladores.AutenticacaoControlador.AutenticarAsync(Blogpessoal.src.dtos.AutenticarDTO)">
+             <summary>
+             Pegar Autorização
+             </summary>
+             <param name="autenticacao">AutenticarDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST /api/Autenticacao
+                 {
+                    "email": "thamyres@domain.com",
+                    "senha": "134652"
+                 }
+            
+             </remarks>
+             <response code="201">Retorna usuario criado</response>
+             <response code="400">Erro na requisição</response>
+             <response code="401">E-mail ou senha invalido</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.PegarTodasPostagensAsync">
+            <summary>
+            Pegar todas postagens
+            </summary>
+            <returns>ActionResult</returns>
+            <response code="200">Lista de postagens</response>
+            <response code="204">Lista vasia</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.PegarPostagemPeloIdAsync(System.Int32)">
+            <summary>
+            Pegar postagem pelo Id
+            </summary>
+            <param name="idPostagem">int</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna a postagem</response>
+            <response code="404">Postagem não existente</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.PegarPostagensPorPesquisaAsync(System.String,System.String,System.String)">
+            <summary>
+            Pegar postagens por Pesquisa
+            </summary>
+            <param name="tituloPostagem">string</param>
+            <param name="descricaoTema">string</param>
+            <param name="emailCriador">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna postagens</response>
+            <response code="204">Postagns não existe pra essa pesquisa</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.NovaPostagemAsync(Blogpessoal.src.dtos.NovaPostagemDTO)">
+             <summary>
+             Criar nova Postagem
+             </summary>
+             <param name="postagem">NovaPostagemDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST /api/Postagens
+                 {  
+                    "titulo": "Dotnet Core mudando o mundo", 
+                    "descricao": "Uma ferramenta muito boa para desenvolver aplicações web",
+                    "foto": "URLDAIMAGEM",
+                    "emailCriador": "thamyres@email.com",
+                    "descricaoTema": "CSHARP"
+                 }
+            
+             </remarks>
+             <response code="201">Retorna postagem criada</response>
+             <response code="400">Erro na requisição</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.AtualizarPostagemAsync(Blogpessoal.src.dtos.AtualizarPostagemDTO)">
+             <summary>
+             Atualizar Tema
+             </summary>
+             <param name="postagem">AtualizarPostagemDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 PUT /api/Postagens
+                 {
+                    "id": 1,   
+                    "titulo": "Dotnet Core mudando o mundo", 
+                    "descricao": "Uma ferramenta muito boa para desenvolver aplicações web",
+                    "foto": "URLDAIMAGEM",
+                    "descricaoTema": "CSHARP"
+                 }
+            
+             </remarks>
+             <response code="200">Retorna postagem atualizada</response>
+             <response code="400">Erro na requisição</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.PostagemControlador.DeletarPostagem(System.Int32)">
+            <summary>
+            Deletar postagem pelo Id
+            </summary>
+            <param name="idPostagem">int</param>
+            <returns>ActionResult</returns>
+            <response code="204">Postagem deletada</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.PegarTodosTemasAsync">
+            <summary>
+            Pegar todos temas
+            </summary>
+            <returns>ActionResult</returns>
+            <response code="200">Lista de temas</response>
+            <response code="204">Lista vasia</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.PegarTemaPeloIdAsync(System.Int32)">
+            <summary>
+            Pegar tema pelo Id
+            </summary>
+            <param name="idTema">int</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna o tema</response>
+            <response code="404">Tema não existente</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.PegarTemasPelaDescricaoAsync(System.String)">
+            <summary>
+            Pegar tema pela Descrição
+            </summary>
+            <param name="descricaoTema">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna temas</response>
+            <response code="204">Descrição não existe</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.NovoTemaAsync(Blogpessoal.src.dtos.NovoTemaDTO)">
+             <summary>
+             Criar novo Tema
+             </summary>
+             <param name="tema">NovoTemaDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST /api/Temas
+                 {
+                    "descricao": "CSHARP",
+                 }
+            
+             </remarks>
+             <response code="201">Retorna tema criado</response>
+             <response code="400">Erro na requisição</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.AtualizarTema(Blogpessoal.src.dtos.AtualizarTemaDTO)">
+             <summary>
+             Atualizar Tema
+             </summary>
+             <param name="tema">AtualizarTemaDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 PUT /api/Temas
+                 {
+                    "id": 1,    
+                    "descricao": "CSHARP"
+                 }
+            
+             </remarks>
+             <response code="200">Retorna tema atualizado</response>
+             <response code="400">Erro na requisição</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.TemaControlador.DeletarTema(System.Int32)">
+            <summary>
+            Deletar tema pelo Id
+            </summary>
+            <param name="idTema">int</param>
+            <returns>ActionResult</returns>
+            <response code="204">Tema deletado</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.PegarUsuarioPeloIdAsync(System.Int32)">
+            <summary>
+            Pegar usuario pelo Id
+            </summary>
+            <param name="idUsuario">int</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna o usuario</response>
+            <response code="404">Usuario não existente</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.PegarUsuariosPeloNomeAsync(System.String)">
+            <summary>
+            Pegar usuario pelo Nome
+            </summary>
+            <param name="nomeUsuario">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna o usuario</response>
+            <response code="204">Nome não existe</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.PegarUsuarioPeloEmailAsync(System.String)">
+            <summary>
+            Pegar usuario pelo Email
+            </summary>
+            <param name="emailUsuario">string</param>
+            <returns>ActionResult</returns>
+            <response code="200">Retorna o usuario</response>
+            <response code="404">Email não existente</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.NovoUsuarioAsync(Blogpessoal.src.dtos.NovoUsuarioDTO)">
+             <summary>
+             Criar novo Usuario
+             </summary>
+             <param name="usuario">NovoUsuarioDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST /api/Usuarios
+                 {
+                    "nome": "Thamyres Cavacanti ",
+                    "email": "thamyres@domain.com",
+                    "senha": "112021",
+                    "foto": "URLFOTO",
+                    "tipo": "NORMAL"
+                 }
+            
+             </remarks>
+             <response code="201">Retorna usuario criado</response>
+             <response code="400">Erro na requisição</response>
+             <response code="401">E-mail ja cadastrado</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.AtualizarUsuarioAsync(Blogpessoal.src.dtos.AtualizarUsuarioDTO)">
+             <summary>
+             Atualizar Usuario
+             </summary>
+             <param name="usuario">AtualizarUsuarioDTO</param>
+             <returns>ActionResult</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 PUT /api/Usuarios
+                 {
+                    "id": 1,    
+                    "nome": "Thamyres Cavalcanti",
+                    "senha": "112021",
+                    "foto": "URLFOTO"
+                 }
+            
+             </remarks>
+             <response code="200">Retorna usuario atualizado</response>
+             <response code="400">Erro na requisição</response>
+        </member>
+        <member name="M:Blogpessoal.src.controladores.UsuarioControlador.DeletarUsuarioAsync(System.Int32)">
+            <summary>
+            Deletar usuario pelo Id
+            </summary>
+            <param name="idUsuario">int</param>
+            <returns>ActionResult</returns>
+            <response code="204">Usuario deletado</response>
+        </member>
+        <member name="T:Blogpessoal.src.data.BlogPessoalContext">
+            <summary>
+            <para>Resumo: Classe contexto, responsavel por carregar contexto e definir DbSets</para>
+            <para>Criado por: Thamyres Cavalcanti </para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.AutenticarDTO">
+            <summary>
+            <para>Resumo: Classe espelho para autenticar um usuario</para>
+            <para>Criado por: Thamyres Cavalvanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.AutorizacaoDTO">
+            <summary>
+            <para>Resumo: Classe espelho para representar autorização de um usuario</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.NovaPostagemDTO">
+            <summary>
+            <para>Resumo: Classe espelho para criar uma nova postagem</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.AtualizarPostagemDTO">
+            <summary>
+            <para>Resumo: Classe espelho para alterar uma postagem</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.NovoTemaDTO">
+            <summary>
+            <para>Resumo: Classe espelho para criar um novo tema</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.AtualizarTemaDTO">
+            <summary>
+            <para>Resumo: Classe espelho para alterar um tema</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.NovoUsuarioDTO">
+            <summary>
+            <para>Resumo: Classe espelho para criar um novo usuario</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.dtos.AtualizarUsuarioDTO">
+            <summary>
+            <para>Resumo: Classe espelho para criar um novo usuario</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.modelos.PostagemModelo">
+            <summary>
+            <para>Resumo: Classe responsavel por representar tb_postagens no banco.</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.modelos.TemaModelo">
+            <summary>
+            <para>Resumo: Classe responsavel por representar tb_temas no banco.</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.modelos.UsuarioModelo">
+            <summary>
+            <para>Resumo: Classe responsavel por representar tb_usuarios no banco.</para>
+            <para>Criado por: Thamyres Cavalcanti </para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio">
+            <summary>
+            <para>Resumo: Classe responsavel por implementar IPostagem</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.AtualizarPostagemAsync(Blogpessoal.src.dtos.AtualizarPostagemDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para atualizar uma postagem</para>
+            </summary>
+            <param name="postagem">AtualizarPostagemDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.DeletarPostagemAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para deletar uma postagem</para>
+            </summary>
+            <param name="id">Id da postagem</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.NovaPostagemAsync(Blogpessoal.src.dtos.NovaPostagemDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para salvar uma nova postagem</para>
+            </summary>
+            <param name="postagem">NovaPostagemDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.PegarPostagemPeloIdAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar uma postagem pelo Id</para>
+            </summary>
+            <param name="id">Id da postagem</param>
+            <return>PostagemModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.PegarPostagensPorPesquisaAsync(System.String,System.String,System.String)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar pegar postagens por pesquisa</para>
+            </summary>
+            <param name="tituloPostagem">Titulo da postagem</param>
+            <param name="descricaoTema">Descrição do tema</param>
+            <param name="emailCriador">Nome do criador</param>
+            <return>List PostagemModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.PostagemRepositorio.PegarTodasPostagensAsync">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar todas postagens</para>
+            </summary>
+            <return>Lista PostagemModelo></return>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio">
+            <summary>
+            <para>Resumo: Classe responsavel por implementar ITema</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.AtualizarTemaAsync(Blogpessoal.src.dtos.AtualizarTemaDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para atualizar um tema</para>
+            </summary>
+            <param name="tema">AtualizarTemaDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.DeletarTemaAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para deletar um tema</para>
+            </summary>
+            <param name="id">Id do tema</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.NovoTemaAsync(Blogpessoal.src.dtos.NovoTemaDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para salvar um novo tema</para>
+            </summary>
+            <param name="tema">NovoTemaDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.PegarTemaPeloIdAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar um tema pelo Id</para>
+            </summary>
+            <param name="id">Id do tema</param>
+            <return>TemaModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.PegarTemaPelaDescricaoAsync(System.String)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar temas pela descrição</para>
+            </summary>
+            <param name="descricao">Descrição do tema</param>
+            <return>Lista TemaModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.TemaRepositorio.PegarTodosTemasAsync">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar todos temas</para>
+            </summary>
+            <return>Lista TemaModelo</return>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio">
+            <summary>
+            <para>Resumo: Classe responsavel por implementar IUsuario</para>
+            <para>Criado por: Thamyres Cvaalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/22</para>
+            </summary>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.AtualizarUsuarioAsync(Blogpessoal.src.dtos.AtualizarUsuarioDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para atualizar um usuario</para>
+            </summary>
+            <param name="usuario">AtualizarUsuarioDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.DeletarUsuarioAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para deletar um usuario</para>
+            </summary>
+            <param name="id">Id do usuario</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.NovoUsuarioAsync(Blogpessoal.src.dtos.NovoUsuarioDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono para salvar um novo usuario</para>
+            </summary>
+            <param name="usuario">NovoUsuarioDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.PegarUsuarioPeloEmailAsync(System.String)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar um usuario pelo email</para>
+            </summary>
+            <param name="email">Email do usuario</param>
+            <return>UsuarioModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.PegarUsuarioPeloIdAsync(System.Int32)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar um usuario pelo Id</para>
+            </summary>
+            <param name="id">Id do usuario</param>
+            <return>UsuarioModelo</return>
+        </member>
+        <member name="M:Blogpessoal.src.repositorios.implementacoes.UsuarioRepositorio.PegarUsuarioPeloNomeAsync(System.String)">
+            <summary>
+            <para>Resumo: Método assíncrono para pegar usuarios pelo nome</para>
+            </summary>
+            <param name="nome">Nome do usuario</param>
+            <return>Lista UsuarioModelo</return>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.IPostagem">
+            <summary>
+            <para>Resumo: Responsavel por representar ações de CRUD de postagem</para>
+            <para>Criado por: Thamyres Cavalcanti </para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.ITema">
+            <summary>
+            <para>Resumo: Responsavel por representar ações de CRUD de tema</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/22</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.repositorios.IUsuario">
+            <summary>
+            <para>Resumo: Responsavel por representar ações de CRUD de usuario</para>
+            <para>Criado por: Thamyres Cavalcanti </para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.servicos.IAutenticacao">
+            <summary>
+            <para>Resumo: Interface Responsavel por representar ações de autenticação</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 13/05/2022</para>
+            </summary>
+        </member>
+        <member name="T:Blogpessoal.src.servicos.implementacoes.AutenticacaoServicos">
+            <summary>
+            <para>Resumo: Classe responsavel por implementar IAutenticacao</para>
+            <para>Criado por: Thamyres Cavalcanti</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 12/05/2022</para>
+            </summary>
+        </member>
+        <member name="M:Blogpessoal.src.servicos.implementacoes.AutenticacaoServicos.CodificarSenha(System.String)">
+            <summary>
+            <para>Resumo: Método responsavel por criptografar senha</para>
+            </summary>
+            <param name="senha">Senha a ser criptografada</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Blogpessoal.src.servicos.implementacoes.AutenticacaoServicos.CriarUsuarioSemDuplicarAsync(Blogpessoal.src.dtos.NovoUsuarioDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono responsavel por criar usuario sem duplicar no banco</para>
+            </summary>
+            <param name="dto">NovoUsuarioDTO</param>
+        </member>
+        <member name="M:Blogpessoal.src.servicos.implementacoes.AutenticacaoServicos.GerarToken(Blogpessoal.src.modelos.UsuarioModelo)">
+            <summary>
+            <para>Resumo: Método responsavel por gerar token JWT</para>
+            </summary>
+            <param name="usuario">UsuarioModelo</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Blogpessoal.src.servicos.implementacoes.AutenticacaoServicos.PegarAutorizacaoAsync(Blogpessoal.src.dtos.AutenticarDTO)">
+            <summary>
+            <para>Resumo: Método assíncrono responsavel devolver autorização para usuario autenticado</para>
+            </summary>
+            <param name="dto">AutenticarDTO</param>
+            <returns>AutorizacaoDTO</returns>
+            <exception cref="T:System.Exception">Usuário não encontrado</exception>
+            <exception cref="T:System.Exception">Senha incorreta</exception>
+        </member>
+        <member name="T:Blogpessoal.src.utilidades.TipoUsuario">
+            <summary>
+            <para>Resumo: Enum responsavel por definir Tipos de usuario do sistema</para>
+            </summary>
+            
+        </member>
+    </members>
+</doc>

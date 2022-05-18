@@ -84,7 +84,7 @@ namespace Blogpessoal.src.controladores
         [Authorize]
         public async Task<ActionResult> PegarTemasPelaDescricaoAsync([FromQuery] string descricaoTema)
         {
-            var temas = await _repositorio.PegarTemasPelaDescricaoAsync(descricaoTema);
+            var temas = await _repositorio.PegarTemaPelaDescricaoAsync(descricaoTema);
 
             if (temas.Count < 1) return NoContent();
 

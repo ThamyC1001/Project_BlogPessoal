@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using static Blogpessoal.src.dtos.AutenticacaoDTO;
+
 
 namespace Blogpessoal.src.controladores
 {
