@@ -1,26 +1,26 @@
 using Blogpessoal.src.data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Blogpessoal.src.repositorios;
 using Blogpessoal.src.repositorios.implementacoes;
 using Blogpessoal.src.servicos;
 using Blogpessoal.src.servicos.implementacoes;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Blogpessoal
 {
@@ -36,9 +36,18 @@ namespace Blogpessoal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configuraçãp Banco de Dados
-            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-
+            // Configuração Banco de Dados
+            if (Configuration["Enviroment:Start"] == "PROD")
+            {
+                services.AddEntityFrameworkNpgsql()
+                    .AddDbContext<BlogPessoalContext>(
+                    opt => opt.UseNpgsql(Configuration["ConnectionStringsProd:DefaultConnection"]));
+            }
+            else
+            {
+                services.AddDbContext<BlogPessoalContext>(
+                   opt => opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
+            }
             // Configuração Repositorios
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<ITema, TemaRepositorio>();
@@ -53,11 +62,13 @@ namespace Blogpessoal
 
             // Configuração do Token Autenticação JWTBearer
             var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
-            services.AddAuthentication(a =>
+            services.AddAuthentication(
+                a =>
             {
                 a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(b =>
+            }).AddJwtBearer(
+                b =>
             {
                 b.RequireHttpsMetadata = false;
                 b.SaveToken = true;
@@ -108,22 +119,28 @@ namespace Blogpessoal
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext contexto)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext context)
         {
             // Ambiente de Desenvolvimento
             if (env.IsDevelopment())
             {
-                contexto.Database.EnsureCreated();
+                context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
-                    c.RoutePrefix = string.Empty;
-                });
+                app.UseSwaggerUI(c => 
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blogpessoal v1"));
 
             }
 
             // Ambiente de produção
+            context.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blogpessoal v1"); 
+               c.RoutePrefix = string.Empty;
+            });
+          
             // Rotas
             app.UseRouting();
 
